@@ -1,37 +1,53 @@
 package com.ifrn.sisconpro.controller;
 
 
+import com.ifrn.sisconpro.model.Fornecedor;
+import com.ifrn.sisconpro.repository.FornecerdorRepository;
+import com.ifrn.sisconpro.service.serviceImple.ContratoServiceImple;
+import com.ifrn.sisconpro.service.serviceImple.FornecedorServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import java.lang.*;
+import java.util.List;
 
 @Controller
 public class FornecedorController {
 
+    @Autowired
+    FornecedorServiceImple service;
 
-/*
-    @RequestMapping(value = "/contratos",  method = RequestMethod.GET)
-    public ModelAndView getContratos(){
-        ModelAndView mv = new ModelAndView("contratos");
-        List<Ocorrencia> ocorrencias = service.findAll();
-        mv.addObject("contratosLista", ocorrencias);
+
+    @RequestMapping(value = "/fornecedores",  method = RequestMethod.GET)
+    public ModelAndView getForncedores(){
+        ModelAndView mv = new ModelAndView("fornecedores");
+        List<Fornecedor> fornecedor = service.findAll();
+        mv.addObject("fornecedorLista", fornecedor);
         return mv;
     }
 
 
-    /*@GetMapping("/cad-contratos.html")
-   // public String exibirForm(Contrato contrato){
-        return "cad-contratos";
+    @GetMapping("/cad-fornecedores")
+    public String exibirForm(Fornecedor forncedores){
+    return "cad-fornecedores";
     }
 
-  //  @PostMapping("/cad-contratos.html")
-  //  public String salvarContrato(Contrato contrato){
-        contrato.builder()
-        .fonteRecurso("BNDES")
+    @PostMapping("/cad-fornecedores")
+    public String salvarFonecedor(Fornecedor fornecedor){
+        fornecedor.builder()
                 .build();
-        service.save(contrato); // Cadastra e atualiza
-        return "redirect:/contratos";
+        service.save(fornecedor); // Cadastra e atualiza
+        return "redirect:/fornecedores";
     }
-*/
+
+    @GetMapping("/fornecedores/{id}")
+    public String excluirFornecedor(@PathVariable("id") long id){
+        service.deleteById(id);
+        return "redirect:/fornecedores";
+    }
 
 
 

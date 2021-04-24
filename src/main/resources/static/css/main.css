@@ -575,3 +575,18 @@ tr:hover {
     font-size: 14px;
     display: inline-block;
     }
+
+.test {
+	font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+.nomeio {
+	width: 100%;
+	padding: 0.5rem 1rem;
+	margin: .8rem 0;
+	border: 1px solid #dae0e5;
+	border-radius: 5px;
+	font-size: 1.4rem; 
+}
+

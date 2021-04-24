@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 public class DummyData {
-
+/*
 
     @Autowired
     ContratoRepository repository;
@@ -60,7 +60,7 @@ public class DummyData {
                 System.out.println("[SAIDA] ID: " + listaContrato.getId());
             }
 
-        }
+        }*/
 
     }
 

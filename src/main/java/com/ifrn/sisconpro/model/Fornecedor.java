@@ -13,13 +13,21 @@ import javax.persistence.*;
 //ANOTACAO LOMBOK
 @Builder(toBuilder = true)
 @Data
+@NoArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 public class Fornecedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private int id;
+    private long id;
+
+    @Column(name = "cnpj", nullable = false)
+    private String cnpj;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -27,7 +35,7 @@ public class Fornecedor {
     @Column(name = "ramo", nullable = false)
     private String ramo;
 
-    @Column(name = "endereco", nullable = false)
+    @Column(name = "endereco")
     private String endereco;
 
     @Column(name = "telefone", nullable = false)

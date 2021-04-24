@@ -13,5 +13,9 @@ public interface ContratoService {
     void deleteById(Long id);
 
 
-}
 
+    Iterable<Contrato> listarContratoProximoVencimento();
+    Iterable<Contrato> contarContratosConfirmados();
+
+
+}

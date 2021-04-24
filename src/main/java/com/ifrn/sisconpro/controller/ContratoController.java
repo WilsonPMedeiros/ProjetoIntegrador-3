@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.lang.*;
 
 import java.util.List;
 
@@ -26,6 +25,20 @@ public class ContratoController {
         return mv;
     }
 
+    @RequestMapping(value = "/contratos/{id}", method = RequestMethod.GET)
+    public ModelAndView exibirDepartamento(@PathVariable("id") long id){
+        ModelAndView mav = new ModelAndView("detalhes-contratos");
+        Contrato contrato = service.findById(id);
+        mav.addObject("contrato", contrato);
+        return mav;
+    }
+
+    @GetMapping("/contratos/.{id}")
+    public String excluirContrato(@PathVariable("id") long id){
+        service.deleteById(id);
+        return "redirect:/contratos";
+    }
+
 
     @GetMapping("/cad-contratos")
    public String exibirForm(Contrato contrato){
@@ -41,41 +54,34 @@ public class ContratoController {
         return "redirect:/contratos";
     }
 
-    /*
 
-    @GetMapping("/{id}")
+    @GetMapping("contratos/..{id}")
     public ModelAndView editarContrato(@PathVariable("id") long id){
-        ModelAndView mv = new ModelAndView("/EditarCliente.html");
+        ModelAndView mv = new ModelAndView("/Editar-cad-contratos");
         Contrato contrato = service.findById(id);
-        //Endereco end = enderecoService.findById(cliente.getEnd().getId());
-        //System.out.println("Esse é o cliente "+cliente+"Esse é o ID"+ cliente.getEnd().getId());
-        mv.addObject("cliente", cliente);
+        mv.addObject("contrato", contrato);
         return  mv;
     }
 
-    @PostMapping("/editarEndereco/{id}")
+    @PostMapping("/Editar-cad-contratos/{id}")
     public String atualizarCliente(@PathVariable("id") long id,
-                                   @ModelAttribute("endereco") Endereco endereco) {
-        Endereco enderecoEditado = enderecoService.findById(id);
-        if (!enderecoEditado.equals(endereco)) {
-            enderecoEditado.setBairro(enderecoEditado.getBairro());
-            enderecoEditado.setCidade(endereco.getCidade());
-            enderecoEditado.setLogradouro(endereco.getLogradouro());
-            enderecoEditado.setUf(endereco.getUf());
-            enderecoService.save(enderecoEditado); // Cadastra e atualiza
+                                   @ModelAttribute("contrato") Contrato contrato) {
+        Contrato contratoEditado = service.findById(id);
+        if (!contratoEditado.equals(contrato)) {
+            contratoEditado.setNumero(contrato.getNumero());
+            contratoEditado.setCnpj(contrato.getCnpj());
+            contratoEditado.setRazaoSocial(contrato.getRazaoSocial());
+            contratoEditado.setValorInicial(contrato.getValorInicial());
+            contratoEditado.setDataInicioVigencia(contrato.getDataInicioVigencia());
+            contratoEditado.setDataFimVigencia(contrato.getDataFimVigencia());
+            contratoEditado.setUnidadeBeneficiaria(contrato.getUnidadeBeneficiaria());
+            contratoEditado.setModalidade(contrato.getModalidade());
+            contratoEditado.setTipoContrato(contrato.getTipoContrato());
+            contratoEditado.setObjetoContrato(contrato.getObjetoContrato());
+            service.save(contratoEditado); // Cadastra e atualiza
         }
 
-        return "redirect:/opcoes";
-    }
-*/
-
-
-    @GetMapping("/contratos/{id}")
-    public String excluirContrato(@PathVariable("id") long id){
-        service.deleteById(id);
         return "redirect:/contratos";
     }
-
-
 
 }
