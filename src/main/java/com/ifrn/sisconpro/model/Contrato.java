@@ -76,7 +76,7 @@ public class Contrato{
     private File arquivo;
 
     @Column(name = "Status")
-    private int status;
+    private int status=1;
 
 
 }
